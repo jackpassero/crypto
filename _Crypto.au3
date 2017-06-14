@@ -86,7 +86,7 @@ Func _Crypto_Signing_SHA256RSA($vIn, $sRSA_PRIVATE_KEY, $asOpenSSL = True)
         If @error Then ExitLoop SetError(3, @error, 1)
 
         ;Create a CSP
-        $aData = DllCall($hAdvapi32, "bool", "CryptAcquireContext", _
+        Local $aData = DllCall($hAdvapi32, "bool", "CryptAcquireContext", _
                 "handle*", Null, _;_Out_ HCRYPTPROV *phProv,
                 "ptr", Null, _;    _In_opt_ LPCSTR szContainer,
                 "str", 'Microsoft Enhanced RSA and AES Cryptographic Provider', _; _In_opt_ LPCSTR szProvider,
@@ -126,7 +126,7 @@ Func _Crypto_Signing_SHA256RSA($vIn, $sRSA_PRIVATE_KEY, $asOpenSSL = True)
         If @error Or Not $aData[0] Then ExitLoop SetError(7, @error, 1)
 
         ;Sign the hash using our imported key
-        $aSize = DllCall($hAdvapi32, "bool", "CryptSignHash", _
+        Local $aSize = DllCall($hAdvapi32, "bool", "CryptSignHash", _
                 "handle", $hHash, _;        _In_ HCRYPTHASH hHash,
                 "dword", $AT_KEYEXCHANGE, _;_In_ DWORD      dwKeySpec,
                 "ptr", Null, _;             _In_opt_ LPCSTR szDescription,
