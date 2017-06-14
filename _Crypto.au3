@@ -50,7 +50,7 @@ Func _Crypto_Signing_SHA256RSA($vIn, $sRSA_PRIVATE_KEY, $asOpenSSL = True)
 
     Local $hProv, $hHash, $szDataToSign, $sOut = False, $hAdvapi32 = DllOpen('Advapi32.dll')
     Select
-		Case IsDllStruct($vIn)
+        Case IsDllStruct($vIn)
             $szDataToSign = $vIn
         Case IsString($vIn)
             $vIn = StringToBinary($vIn, 4)
